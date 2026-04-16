@@ -313,7 +313,7 @@ function OrbitingCoins({ count = 5, radius = 2.2, earning }: {
                   emissive="#0052FF" emissiveIntensity={earning ? 0.5 : 0.1} />
               </mesh>
               {/* $ symbol */}
-              <Text position={[0, 0, 0.03]} fontSize={0.12} color="white" fontWeight={700}>
+              <Text position={[0, 0, 0.03]} fontSize={0.12} color="white">
                 $
               </Text>
               {/* Coin rim */}
@@ -448,7 +448,7 @@ export default function Scene3D({ state }: { state: PetState }) {
             position={[0, 2.2, 0]}
             fontSize={0.22}
             color={emotionColor}
-            fontWeight={700}
+           
             anchorX="center"
           >
             {`$${state.balance_usdc.toFixed(4)} USDC`}
