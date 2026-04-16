@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="300" height="400">
+  <defs>
+    <radialGradient id="bg3d" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#1a0a3e"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </radialGradient>
+    <radialGradient id="glow3d" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5934FF" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#5934FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="f1">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#5934FF" flood-opacity="0.6"/>
+    </filter>
+    <filter id="f2">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00C853" flood-opacity="0.8"/>
+    </filter>
+    <linearGradient id="body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1a5e"/>
+      <stop offset="100%" stop-color="#141428"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#050510"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0066FF"/>
+      <stop offset="100%" stop-color="#4101F6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="300" height="400" fill="url(#bg3d)"/>
+
+  <!-- Glow behind device -->
+  <ellipse cx="150" cy="260" rx="100" ry="30" fill="url(#glow3d)" opacity="0.8"/>
+
+  <!-- Device shadow -->
+  <ellipse cx="152" cy="355" rx="70" ry="12" fill="#5934FF" opacity="0.15"/>
+
+  <!-- Device body (3D perspective) -->
+  <!-- Right face (3D depth) -->
+  <polygon points="220,120 232,128 232,348 220,340" fill="#0d0d1a" stroke="#5934FF" stroke-width="0.5"/>
+  <!-- Bottom face -->
+  <polygon points="80,340 220,340 232,348 92,348" fill="#0a0a14" stroke="#5934FF" stroke-width="0.5"/>
+  <!-- Main face -->
+  <rect x="80" y="120" width="140" height="220" rx="8" fill="url(#body)" stroke="#5934FF" stroke-width="2" filter="url(#f1)"/>
+
+  <!-- Screen bezel -->
+  <rect x="90" y="132" width="120" height="140" rx="4" fill="#0a0a0a" stroke="#2A2A2A" stroke-width="1"/>
+  <!-- Screen -->
+  <rect x="94" y="136" width="112" height="132" rx="2" fill="url(#screen)"/>
+
+  <!-- Screen scanlines -->
+  <rect x="94" y="136" width="112" height="132" rx="2" fill="none"
+    style="background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px)"/>
+
+  <!-- Screen content: pet face with glow -->
+  <circle cx="150" cy="195" r="28" fill="#0d0d1a" stroke="#5934FF" stroke-width="1" opacity="0.5"/>
+  <text x="150" y="205" font-size="32" text-anchor="middle" filter="url(#f2)">🙂</text>
+
+  <!-- Screen stats bars -->
+  <text x="100" y="228" font-size="6" fill="#9E9E9E" font-family="monospace">HUNGER</text>
+  <rect x="100" y="231" width="104" height="3" rx="1" fill="#1a1a1a"/>
+  <rect x="100" y="231" width="78" height="3" rx="1" fill="#FF6D00"/>
+
+  <text x="100" y="242" font-size="6" fill="#9E9E9E" font-family="monospace">HAPPY</text>
+  <rect x="100" y="245" width="104" height="3" rx="1" fill="#1a1a1a"/>
+  <rect x="100" y="245" width="90" height="3" rx="1" fill="#00C853"/>
+
+  <text x="100" y="256" font-size="6" fill="#9E9E9E" font-family="monospace">HEALTH</text>
+  <rect x="100" y="259" width="104" height="3" rx="1" fill="#1a1a1a"/>
+  <rect x="100" y="259" width="95" height="3" rx="1" fill="#5934FF"/>
+
+  <!-- Balance display -->
+  <text x="150" y="278" font-size="8" text-anchor="middle" fill="#5934FF" font-family="monospace" font-weight="bold">$14.20 USDC</text>
+
+  <!-- Bottom bar -->
+  <rect x="80" y="280" width="140" height="18" rx="0" fill="#141414" stroke="#2A2A2A" stroke-width="0.5"/>
+  <text x="90" y="292" font-size="6" fill="#444" font-family="monospace">PET FEED WALLET EARN</text>
+
+  <!-- Hardware buttons -->
+  <circle cx="108" cy="318" r="8" fill="#1a1a2e" stroke="#5934FF" stroke-width="1.5"/>
+  <circle cx="130" cy="318" r="8" fill="#1a1a2e" stroke="#5934FF" stroke-width="1.5"/>
+  <circle cx="152" cy="318" r="8" fill="#4101F6" stroke="#5934FF" stroke-width="1.5"/>
+  <circle cx="174" cy="318" r="8" fill="#1a1a2e" stroke="#5934FF" stroke-width="1.5"/>
+  <circle cx="196" cy="318" r="8" fill="#1a1a2e" stroke="#5934FF" stroke-width="1.5"/>
+
+  <text x="108" y="322" font-size="7" text-anchor="middle" fill="#9E9E9E" font-family="monospace">B</text>
+  <text x="130" y="322" font-size="7" text-anchor="middle" fill="#9E9E9E" font-family="monospace">Y</text>
+  <text x="152" y="322" font-size="7" text-anchor="middle" fill="white" font-family="monospace">A</text>
+  <text x="174" y="322" font-size="7" text-anchor="middle" fill="#9E9E9E" font-family="monospace">X</text>
+  <text x="196" y="322" font-size="7" text-anchor="middle" fill="#9E9E9E" font-family="monospace">FN</text>
+
+  <!-- USB port -->
+  <rect x="136" y="338" width="28" height="6" rx="2" fill="#0d0d0d" stroke="#333" stroke-width="1"/>
+
+  <!-- Floating USDC coins -->
+  <circle cx="60" cy="160" r="18" fill="url(#coin)" stroke="#5934FF" stroke-width="1.5" filter="url(#f1)" opacity="0.9"/>
+  <text x="60" y="165" font-size="12" text-anchor="middle" fill="white" font-weight="bold" font-family="monospace">$</text>
+
+  <circle cx="248" cy="200" r="14" fill="url(#coin)" stroke="#5934FF" stroke-width="1" filter="url(#f1)" opacity="0.7"/>
+  <text x="248" y="205" font-size="10" text-anchor="middle" fill="white" font-weight="bold" font-family="monospace">$</text>
+
+  <circle cx="40" cy="240" r="10" fill="url(#coin)" stroke="#5934FF" stroke-width="1" filter="url(#f1)" opacity="0.5"/>
+  <text x="40" y="244" font-size="7" text-anchor="middle" fill="white" font-weight="bold" font-family="monospace">$</text>
+
+  <!-- Connecting lines from coins to device -->
+  <line x1="78" y1="165" x2="90" y2="175" stroke="#5934FF" stroke-width="1" stroke-dasharray="3,2" opacity="0.5"/>
+  <line x1="234" y1="200" x2="220" y2="195" stroke="#5934FF" stroke-width="1" stroke-dasharray="3,2" opacity="0.4"/>
+
+  <!-- WiFi signal -->
+  <path d="M 130 90 Q 150 82 170 90" fill="none" stroke="#5934FF" stroke-width="1.5" opacity="0.3"/>
+  <path d="M 136 98 Q 150 92 164 98" fill="none" stroke="#5934FF" stroke-width="1.5" opacity="0.5"/>
+  <path d="M 142 106 Q 150 102 158 106" fill="none" stroke="#5934FF" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="150" cy="112" r="2.5" fill="#5934FF"/>
+
+  <!-- Label -->
+  <text x="150" y="385" font-size="10" text-anchor="middle" fill="#5934FF" font-family="monospace" letter-spacing="2">MONEYPET</text>
+  <text x="150" y="398" font-size="7" text-anchor="middle" fill="#444" font-family="monospace">ESP32 AI AGENT DEVICE</text>
+</svg>
