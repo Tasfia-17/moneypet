@@ -7,19 +7,18 @@ import { useState, useCallback, useRef } from "react";
 
 export function useVoice(onResult: (text: string) => void) {
   const [listening, setListening] = useState(false);
-  const recRef = useRef<SpeechRecognition | null>(null);
+  const recRef = useRef<any>(null);
 
   const startListening = useCallback(() => {
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SpeechRecognition) return;
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR) return;
 
-    const rec = new SpeechRecognition();
+    const rec = new SR();
     rec.lang = "en-US";
     rec.interimResults = false;
     rec.maxAlternatives = 1;
 
-    rec.onresult = (e: SpeechRecognitionEvent) => {
+    rec.onresult = (e: any) => {
       const text = e.results[0][0].transcript;
       onResult(text);
     };
