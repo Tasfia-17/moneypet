@@ -3,11 +3,14 @@ import { useState, useCallback } from "react";
 import { useVoice, speak } from "@/hooks/useVoice";
 
 const QUICK = [
+  "check balance",
   "bitcoin price",
+  "ethereum price",
   "trending coins",
   "apple stock",
-  "calculate sqrt(144)",
-  "search crypto news",
+  "nvidia stock",
+  "calculate 1 BTC in USD",
+  "search DeFi news",
   "show spending controls",
   "create checkout for 1 USDC",
   "post to billboard",

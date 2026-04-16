@@ -27,10 +27,23 @@ spending_controls: dict = {}
 
 
 async def tick_loop():
+    """Decay stats every 60s. Also autonomously check BTC price every 5 min."""
+    global current_emotion
+    tick_count = 0
     while True:
-        await asyncio.sleep(30)
+        await asyncio.sleep(60)
         pet.tick()
         pet.save()
+        tick_count += 1
+        # Every 5 minutes: autonomous price check (costs $0.06 via Locus)
+        if tick_count % 5 == 0:
+            try:
+                from agent import process_command
+                reply, _, emotion = await process_command("bitcoin price", pet)
+                current_emotion = emotion
+                pet.save()
+            except Exception:
+                pass
 
 
 async def boot_sequence():

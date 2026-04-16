@@ -16,19 +16,19 @@ def tool(keys):
 # ── Intent detection ──────────────────────────────────────────────────────────
 
 PATTERNS = [
-    ("balance",    r"\b(balance|wallet|how much money|my funds|usdc balance)\b"),
-    ("controls",   r"\b(limit|controls|policy|allowance|spending|budget|rules)\b"),
-    ("trending",   r"\b(trending|hot coins|popular coins|top coins|gainers|losers)\b"),
-    ("stock",      r"\b(stock|share|equity|aapl|apple|tesla|tsla|nvidia|nvda|sp500|nasdaq)\b"),
-    ("math",       r"\b(calculate|compute|math|formula|convert|equals|wolfram|sqrt|integral)\b"),
-    ("news",       r"\b(news|search|research|what.s happening|latest|headlines)\b"),
-    ("price",      r"\b(price|worth|how much is|bitcoin|btc|eth|ethereum|solana|sol|crypto|doge|ada|avax)\b"),
-    ("checkout",   r"\b(checkout|earn|sell|charge|pay me|create.*pay|get paid)\b"),
+    ("balance",    r"\b(balance|wallet|how much money|my funds|usdc balance|my balance)\b"),
+    ("controls",   r"\b(limit|controls|policy|allowance|spending|budget|rules|governance)\b"),
+    ("trending",   r"\b(trending|hot coins|popular coins|top coins|gainers|losers|top crypto)\b"),
+    ("stock",      r"\b(stock|share|equity|aapl|apple|tesla|tsla|nvidia|nvda|sp500|nasdaq|s&p)\b"),
+    ("math",       r"\b(calculate|compute|math|formula|convert|equals|wolfram|sqrt|integral|derivative|solve)\b"),
+    ("news",       r"\b(news|search|research|what.s happening|latest|headlines|article)\b"),
+    ("price",      r"\b(price|worth|how much is|bitcoin|btc|eth|ethereum|solana|sol|crypto|doge|ada|avax|bnb|xrp)\b"),
+    ("checkout",   r"\b(checkout|earn|sell|charge|pay me|create.*pay|get paid|invoice|payment link)\b"),
     ("send",       r"\b(send|transfer|pay|give).*(0x[a-fA-F0-9]{10,}|\d+(\.\d+)?\s*usdc)\b"),
-    ("billboard",  r"\b(billboard|announce|post|tweet|shout)\b"),
-    ("register",   r"\b(register|setup|create wallet|init|initialize)\b"),
-    ("status",     r"\b(how are you|feeling|status|mood|health|hungry|happy|stats)\b"),
-    ("help",       r"\b(help|what can you do|commands|options)\b"),
+    ("billboard",  r"\b(billboard|announce|post|tweet|shout|publish)\b"),
+    ("register",   r"\b(register|setup|create wallet|init|initialize|new wallet)\b"),
+    ("status",     r"\b(how are you|feeling|status|mood|health|hungry|happy|stats|report)\b"),
+    ("help",       r"\b(help|what can you do|commands|options|guide|tutorial)\b"),
 ]
 
 COIN_MAP = {
