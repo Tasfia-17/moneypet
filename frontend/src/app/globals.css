@@ -1,0 +1,391 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ava Box exact color palette from screen_feed.c / screen_portfolio.c */
+:root {
+  --bg:       #0A0A0A;
+  --bar:      #141414;
+  --bar2:     #1E1E1E;
+  --divider:  #2A2A2A;
+  --row-alt:  #0D0D0D;
+  --row-sel:  #0D2010;
+  --green:    #00C853;
+  --red:      #FF1744;
+  --orange:   #FF6D00;
+  --white:    #FFFFFF;
+  --gray:     #9E9E9E;
+  --sol:      #9945FF;
+  --eth:      #627EEA;
+  --base:     #0052FF;
+  --locus:    #4101F6;
+  --locus-l:  #5934FF;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #050505;
+  color: var(--white);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  -webkit-font-smoothing: none;
+  image-rendering: pixelated;
+}
+
+/* ── Device shell ── */
+.device-shell {
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 0 40px rgba(65,1,246,0.3), inset 0 1px 0 #444;
+  position: relative;
+}
+
+.device-label {
+  text-align: center;
+  font-size: 9px;
+  color: #444;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* ── 320×240 screen ── */
+.device-screen {
+  width: 320px;
+  height: 240px;
+  background: var(--bg);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #333;
+  /* CRT scanline effect */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 1px,
+    rgba(0,0,0,0.08) 1px,
+    rgba(0,0,0,0.08) 2px
+  );
+}
+
+/* ── Screen zones (exact pixel layout from Ava Box) ── */
+.top-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 22px;
+  background: var(--bar);
+  border-bottom: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  gap: 4px;
+  z-index: 10;
+}
+
+.bottom-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 25px;
+  background: var(--bar);
+  border-top: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  z-index: 10;
+}
+
+.screen-body {
+  position: absolute;
+  top: 22px;
+  bottom: 25px;
+  left: 0; right: 0;
+  overflow: hidden;
+}
+
+/* ── Typography ── */
+.t-xs  { font-size: 9px;  line-height: 1.2; }
+.t-sm  { font-size: 10px; line-height: 1.2; }
+.t-md  { font-size: 11px; line-height: 1.3; }
+.t-lg  { font-size: 13px; line-height: 1.3; font-weight: bold; }
+.t-xl  { font-size: 16px; line-height: 1.2; font-weight: bold; }
+.t-xxl { font-size: 20px; line-height: 1.1; font-weight: bold; }
+
+.c-green  { color: var(--green); }
+.c-red    { color: var(--red); }
+.c-orange { color: var(--orange); }
+.c-gray   { color: var(--gray); }
+.c-white  { color: var(--white); }
+.c-locus  { color: var(--locus-l); }
+
+/* ── Feed rows (24px each, 8 visible) ── */
+.feed-row {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--divider);
+  padding: 0 4px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.feed-row:nth-child(even) { background: var(--row-alt); }
+.feed-row.selected { background: var(--row-sel); }
+.feed-row:hover { background: #0f1a0f; }
+
+/* Column widths matching Ava Box exactly */
+.col-chain { width: 32px; flex-shrink: 0; }
+.col-sym   { width: 90px; flex-shrink: 0; overflow: hidden; }
+.col-price { width: 90px; flex-shrink: 0; text-align: right; }
+.col-chg   { width: 72px; flex-shrink: 0; text-align: right; }
+.col-fill  { flex: 1; }
+
+/* ── Chain badge ── */
+.chain-badge {
+  display: inline-block;
+  font-size: 8px;
+  font-weight: bold;
+  padding: 1px 3px;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+}
+.chain-sol  { background: rgba(153,69,255,0.25); color: var(--sol); border: 1px solid var(--sol); }
+.chain-eth  { background: rgba(98,126,234,0.25); color: var(--eth); border: 1px solid var(--eth); }
+.chain-base { background: rgba(0,82,255,0.25);   color: var(--base); border: 1px solid var(--base); }
+.chain-usdc { background: rgba(65,1,246,0.25);   color: var(--locus-l); border: 1px solid var(--locus-l); }
+
+/* ── Stat bars (TamaFi style) ── */
+.stat-bar-track {
+  height: 4px;
+  background: #1a1a1a;
+  border: 1px solid var(--divider);
+  border-radius: 0;
+  overflow: hidden;
+}
+.stat-bar-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+/* ── Pet sprite area ── */
+.pet-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  position: relative;
+}
+
+.pet-sprite {
+  font-size: 28px;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px currentColor);
+  transition: all 0.3s;
+}
+
+.pet-sprite.pulse {
+  animation: petpulse 1s ease-in-out infinite;
+}
+
+@keyframes petpulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* ── Tx log rows ── */
+.tx-row {
+  height: 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px;
+  border-bottom: 1px solid #111;
+  font-size: 9px;
+}
+.tx-row:nth-child(even) { background: var(--row-alt); }
+
+/* ── Screen tabs (like Ava Box page navigation) ── */
+.screen-tabs {
+  display: flex;
+  gap: 1px;
+  background: var(--divider);
+}
+.screen-tab {
+  flex: 1;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: var(--bar);
+  color: var(--gray);
+  cursor: pointer;
+  border: none;
+  transition: all 0.1s;
+}
+.screen-tab.active {
+  background: var(--bar2);
+  color: var(--white);
+  border-bottom: 1px solid var(--locus-l);
+}
+
+/* ── Confirm screen ── */
+.confirm-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-bottom: 1px solid #111;
+}
+
+/* ── Notify overlay ── */
+.notify-overlay {
+  position: absolute;
+  bottom: 26px;
+  left: 4px; right: 4px;
+  background: #1a1a00;
+  border: 1px solid var(--orange);
+  padding: 4px 8px;
+  font-size: 10px;
+  color: var(--orange);
+  z-index: 20;
+  animation: notifyin 0.2s ease;
+}
+@keyframes notifyin {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Result screen ── */
+.result-icon {
+  font-size: 32px;
+  text-align: center;
+  margin: 8px 0;
+  animation: resultpop 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes resultpop {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+/* ── Device buttons ── */
+.btn-group {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.dev-btn {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid #444;
+  background: #222;
+  color: #aaa;
+  font-size: 9px;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.1s;
+  user-select: none;
+}
+.dev-btn:active, .dev-btn.pressed {
+  background: #333;
+  border-color: var(--locus-l);
+  color: var(--white);
+  transform: scale(0.92);
+}
+.dev-btn.primary {
+  background: var(--locus);
+  border-color: var(--locus-l);
+  color: white;
+}
+
+/* ── Command panel ── */
+.cmd-input {
+  background: #0d0d0d;
+  border: 1px solid var(--divider);
+  color: var(--white);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  padding: 6px 8px;
+  width: 100%;
+  outline: none;
+}
+.cmd-input:focus { border-color: var(--locus-l); }
+
+.cmd-btn {
+  background: var(--locus);
+  border: none;
+  color: white;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.cmd-btn:hover { background: var(--locus-l); }
+.cmd-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.cmd-btn-voice {
+  background: #1a1a1a;
+  border: 1px solid var(--divider);
+  color: var(--gray);
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.1s;
+}
+.cmd-btn-voice.listening {
+  background: #1a0000;
+  border-color: var(--red);
+  color: var(--red);
+  animation: voicepulse 0.8s ease-in-out infinite;
+}
+@keyframes voicepulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,23,68,0.4); }
+  50%       { box-shadow: 0 0 0 4px rgba(255,23,68,0); }
+}
+
+.quick-cmd {
+  background: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  color: var(--gray);
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  padding: 3px 6px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: all 0.1s;
+}
+.quick-cmd:hover { border-color: var(--divider); color: var(--white); }
+
+/* ── Reply bubble ── */
+.reply-bubble {
+  background: #0d0d0d;
+  border: 1px solid var(--divider);
+  border-left: 2px solid var(--locus-l);
+  padding: 6px 8px;
+  font-size: 10px;
+  color: #ccc;
+  min-height: 36px;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+/* ── Glow effects ── */
+.glow-green { text-shadow: 0 0 8px var(--green); }
+.glow-red   { text-shadow: 0 0 8px var(--red); }
+.glow-locus { text-shadow: 0 0 8px var(--locus-l); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--divider); }
