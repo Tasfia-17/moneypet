@@ -80,22 +80,34 @@ async def coingecko_price(coin: str) -> dict:
     return await wrapped("coingecko", "simple-price",
                          {"ids": coin, "vs_currencies": "usd", "include_24hr_change": True})
 
-
 async def coingecko_trending() -> dict:
     return await wrapped("coingecko", "trending", {})
 
+async def coingecko_global() -> dict:
+    return await wrapped("coingecko", "global", {})
+
+async def coingecko_market_chart(coin: str, days: int = 7) -> dict:
+    return await wrapped("coingecko", "market-chart",
+                         {"id": coin, "vs_currency": "usd", "days": days})
 
 async def alpha_vantage_quote(symbol: str) -> dict:
     return await wrapped("alphavantage", "global-quote", {"symbol": symbol})
 
+async def alpha_vantage_news(tickers: str = "CRYPTO:BTC") -> dict:
+    return await wrapped("alphavantage", "news-sentiment", {"tickers": tickers, "sort": "LATEST"})
+
+async def alpha_vantage_forex(from_cur: str, to_cur: str) -> dict:
+    return await wrapped("alphavantage", "currency-exchange-rate",
+                         {"from_currency": from_cur, "to_currency": to_cur})
 
 async def wolfram_answer(query: str) -> dict:
     return await wrapped("wolframalpha", "short-answer", {"i": query})
 
-
 async def brave_news(query: str) -> dict:
     return await wrapped("brave", "news-search", {"q": query})
 
+async def brave_web(query: str) -> dict:
+    return await wrapped("brave", "web-search", {"q": query})
 
 async def perplexity_search(query: str) -> str:
     data = await wrapped("perplexity", "chat",
@@ -105,6 +117,34 @@ async def perplexity_search(query: str) -> str:
         return f"PENDING_APPROVAL:{data.get('approval_url','')}"
     choices = data.get("choices", [])
     return choices[0]["message"]["content"] if choices else "No results."
+
+async def openweather_current(city: str) -> dict:
+    geo = await wrapped("openweather", "geocode", {"q": city, "limit": 1})
+    if isinstance(geo, dict) and geo.get("_pending"): return geo
+    locations = geo if isinstance(geo, list) else (geo.get("data") or [])
+    if not locations: return {"error": "City not found"}
+    lat = locations[0].get("lat") or locations[0].get("latitude")
+    lon = locations[0].get("lon") or locations[0].get("longitude")
+    return await wrapped("openweather", "current-weather", {"lat": lat, "lon": lon, "units": "metric"})
+
+async def deepl_translate(text: str, target: str = "EN") -> dict:
+    return await wrapped("deepl", "translate", {"text": [text], "target_lang": target})
+
+async def x_search(query: str) -> dict:
+    return await wrapped("x", "tweet-search-recent",
+                         {"query": query, "max_results": 5,
+                          "tweet.fields": "public_metrics,created_at"})
+
+async def exa_search(query: str) -> dict:
+    return await wrapped("exa", "search", {"query": query, "numResults": 3})
+
+async def suno_generate(prompt: str, style: str = "electronic") -> dict:
+    return await wrapped("suno", "generate-music",
+                         {"customMode": True, "instrumental": True,
+                          "model": "V3_5", "prompt": prompt, "style": style})
+
+async def suno_status(task_id: str) -> dict:
+    return await wrapped("suno", "get-music-status", {"taskId": task_id})
 
 
 # ── Checkout ──────────────────────────────────────────────────────────────────

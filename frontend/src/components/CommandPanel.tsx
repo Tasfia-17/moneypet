@@ -5,16 +5,21 @@ import { useVoice, speak } from "@/hooks/useVoice";
 const QUICK = [
   "check balance",
   "bitcoin price",
-  "ethereum price",
+  "global market",
+  "btc 7d chart",
   "trending coins",
   "apple stock",
-  "nvidia stock",
+  "USD to EUR",
+  "weather in Tokyo",
+  "translate hello in Spanish",
+  "twitter bitcoin",
+  "search web what is DeFi",
+  "generate music crypto vibes",
   "calculate 1 BTC in USD",
   "search DeFi news",
   "show spending controls",
   "create checkout for 1 USDC",
   "post to billboard",
-  "how are you",
 ];
 
 export default function CommandPanel({ onCommand, disabled }: {
